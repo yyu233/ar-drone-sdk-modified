@@ -1,5 +1,6 @@
 Modified based on:https://github.com/SUPENTA/ardrone-sdk-android
 
+More detailed timeline for my activty on this project 
 14/06
 Comment out 186-189(DashboardActivityBase) and paste 146-149
 In DashboardAcivity, add onStartGames()->start ConnectActivity 
