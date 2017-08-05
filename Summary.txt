@@ -1,0 +1,39 @@
+Summary of the Drone Project
+
+What did I modify? 
+
+ControlDroneActivity.java and HudViewController.java are the files that I commit the most modifications.
+
+ControlDroneActivity.java:
+
+•	Made changes to deactivate methods relevant to the joysticks. 
+•	Implemented onSingleTapConfirmed callback function which now can detect user touch point position on screen, draw the destination marker, and calculate the displacement on screen from the starting marker to the destination marker. 
+•	Added and implemented button “Go” onClick callback function. This function creates a worker thread to send the important drone control commands to let the drone fly autonomously along a straight line. Use a handler to control the life cycle of the work thread. 
+•	Added and implemented button “Stop” onClick callback function. This function mainly used to change the UI and pause the drone flying thread. 
+
+HudViewController.java:
+
+•	Created button “Go” and “Stop”. Both “Go” and “Stop” have two different UI state: normal and pressed. When press the button, the only UI difference is the color of these 2 buttons will become darker. 
+•	Created start marker image and destination marker image. 
+•	Created a MapStageRender.java to replace the original ViedeoStageRender.java.
+•	Commented out method relevant to joysticks 
+•	Created and added ScaleGestureDetector.java and RotateGestureDetector.java (not used)
+•	Implemented onScroll function. Added a boundary condition code to limit the range that the use can drag the map so that the map does not move off the screen. 
+•	Implemented onScale function. Zoom range from 1.0 to 5.0.
+
+Some other new class I created: 
+
+•	VIONavDataService.java. An IntentService used for setting up a TCP server to listen and retrieve the VIONavData sent from the Tango Phone
+•	VIONavData.java. An object class that contains the pose and timestamp data. 
+
+Some important information about the SDK: 
+
+•	DroneControlService.java calls DroneProxy.java to handle any drone commands. All the native function that relevant to drone is in DroneProxy. 
+•	The author of the original SDK didn’t choose to use the Android custom view to build the UI. So there is no layout file for the ControlDroneActivity.java. Instead, most of the UI parts are in the HudViewController.java file. If I am not wrong, there is only one glsurfaceview. Everything including the button, images, top and bottom bars are not Android custom but rather rendered using OpenGL ES 2.0. 
+•	The original SDK has two rendering methods: software or hardware rendering. However, the author hard coded to force the app to be in the hardware rendering mode. I checked and tested. It is because the software mode causes the app to crash but the author does not say anything about it. 
+For more details, please check README.md. 
+•	AR Drone Wifi card creates an infrastructure network. It has a DHCP server that will allocate IP address to the connected devices. So it is not P2P network. More information please read the developer guide. 
+•	You cannot use WifiP2P simultaneously with Wifi network connected to the drone because the lab Galaxy phone does not support both modes to be on. Some phones may be able to. 
+
+
+
