@@ -6,34 +6,35 @@ ControlDroneActivity.java and HudViewController.java are the files that I commit
 
 ControlDroneActivity.java:
 
-ï	Made changes to deactivate methods relevant to the joysticks. 
-ï	Implemented onSingleTapConfirmed callback function which now can detect user touch point position on screen, draw the destination marker, and calculate the displacement on screen from the starting marker to the destination marker. 
-ï	Added and implemented button ìGoî onClick callback function. This function creates a worker thread to send the important drone control commands to let the drone fly autonomously along a straight line. Use a handler to control the life cycle of the work thread. 
-ï	Added and implemented button ìStopî onClick callback function. This function mainly used to change the UI and pause the drone flying thread. 
+‚Ä¢	Made changes to deactivate methods relevant to the joysticks. 
+‚Ä¢	Implemented onSingleTapConfirmed callback function which now can detect user touch point position on screen, draw the destination marker, and calculate the displacement on screen from the starting marker to the destination marker. 
+‚Ä¢	Added and implemented button ‚ÄúGo‚Äù onClick callback function. This function creates a worker thread to send the important drone control commands to let the drone fly autonomously along a straight line. Use a handler to control the life cycle of the work thread. 
+‚Ä¢	Added and implemented button ‚ÄúStop‚Äù onClick callback function. This function mainly used to change the UI and pause the drone flying thread. 
 
 HudViewController.java:
 
-ï	Created button ìGoî and ìStopî. Both ìGoî and ìStopî have two different UI state: normal and pressed. When press the button, the only UI difference is the color of these 2 buttons will become darker. 
-ï	Created start marker image and destination marker image. 
-ï	Created a MapStageRender.java to replace the original ViedeoStageRender.java.
-ï	Commented out method relevant to joysticks 
-ï	Created and added ScaleGestureDetector.java and RotateGestureDetector.java (not used)
-ï	Implemented onScroll function. Added a boundary condition code to limit the range that the use can drag the map so that the map does not move off the screen. 
-ï	Implemented onScale function. Zoom range from 1.0 to 5.0.
+‚Ä¢	Created button ‚ÄúGo‚Äù and ‚ÄúStop‚Äù. Both ‚ÄúGo‚Äù and ‚ÄúStop‚Äù have two different UI state: normal and pressed. When press the button, the only UI difference is the color of these 2 buttons will become darker. 
+‚Ä¢	Created start marker image and destination marker image. 
+‚Ä¢	Created a MapStageRender.java to replace the original ViedeoStageRender.java.
+‚Ä¢	Commented out method relevant to joysticks 
+‚Ä¢	Created and added ScaleGestureDetector.java and RotateGestureDetector.java (not used)
+‚Ä¢	Implemented onScroll function. Added a boundary condition code to limit the range that the use can drag the map so that the map does not move off the screen. 
+‚Ä¢	Implemented onScale function. Zoom range from 1.0 to 5.0.
 
 Some other new class I created: 
 
-ï	VIONavDataService.java. An IntentService used for setting up a TCP server to listen and retrieve the VIONavData sent from the Tango Phone
-ï	VIONavData.java. An object class that contains the pose and timestamp data. 
+‚Ä¢	VIONavDataService.java. An IntentService used for setting up a TCP server to listen and retrieve the VIONavData sent from the Tango Phone
+‚Ä¢	VIONavData.java. An object class that contains the pose and timestamp data. 
 
 Some important information about the SDK: 
 
-ï	DroneControlService.java calls DroneProxy.java to handle any drone commands. All the native function that relevant to drone is in DroneProxy. 
-ï	The author of the original SDK didnít choose to use the Android custom view to build the UI. So there is no layout file for the ControlDroneActivity.java. Instead, most of the UI parts are in the HudViewController.java file. If I am not wrong, there is only one glsurfaceview. Everything including the button, images, top and bottom bars are not Android custom but rather rendered using OpenGL ES 2.0. 
-ï	The original SDK has two rendering methods: software or hardware rendering. However, the author hard coded to force the app to be in the hardware rendering mode. I checked and tested. It is because the software mode causes the app to crash but the author does not say anything about it. 
+‚Ä¢	DroneControlService.java calls DroneProxy.java to handle any drone commands. All the native function that relevant to drone is in DroneProxy. 
+‚Ä¢	The author of the original SDK didn‚Äôt choose to use the Android custom view to build the UI. So there is no layout file for the ControlDroneActivity.java. Instead, most of the UI parts are in the HudViewController.java file. If I am not wrong, there is only one glsurfaceview. Everything including the button, images, top and bottom bars are not Android custom but rather rendered using OpenGL ES 2.0. 
+‚Ä¢	The original SDK has two rendering methods: software or hardware rendering. However, the author hard coded to force the app to be in the hardware rendering mode. I checked and tested. It is because the software mode causes the app to crash but the author does not say anything about it. 
+
 For more details, please check README.md. 
-ï	AR Drone Wifi card creates an infrastructure network. It has a DHCP server that will allocate IP address to the connected devices. So it is not P2P network. More information please read the developer guide. 
-ï	You cannot use WifiP2P simultaneously with Wifi network connected to the drone because the lab Galaxy phone does not support both modes to be on. Some phones may be able to. 
+‚Ä¢	AR Drone Wifi card creates an infrastructure network. It has a DHCP server that will allocate IP address to the connected devices. So it is not P2P network. More information please read the developer guide. 
+‚Ä¢	You cannot use WifiP2P simultaneously with Wifi network connected to the drone because the lab Galaxy phone does not support both modes to be on. Some phones may be able to. 
 
 
 
